@@ -7,6 +7,22 @@ become: true
   tasks:
 
     - name: Run Calculator Container
+
+  tasks:
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Run Docker container
       docker_container:
         name: scientific-calculator
         image: vishnuchavala/scientific-calculator:latest
