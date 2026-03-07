@@ -84,5 +84,20 @@ Build URL: ${env.BUILD_URL}
                 to: "vishnu.chavala@gmail.com"
             )
         }
+}
+        stage('Deploy with Ansible') {
+    steps {
+        sh '''
+        export LANG=en_US.UTF-8
+        export LC_ALL=en_US.UTF-8
+        ansible-playbook deploy.yml -i inventory
+        '''
+    }
+}
+stage('Verify Deployment') {
+    steps {
+        sh 'docker ps'
+    }
+}
     }
 }
