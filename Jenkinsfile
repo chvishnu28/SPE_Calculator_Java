@@ -39,9 +39,13 @@ stage('Push Docker Image to Docker Hub') {
     }
 }
         stage('Deploy with Ansible') {
-            steps {
-                sh 'ansible-playbook deploy.yml -i inventory'
-            }
-        }
+    steps {
+        sh '''
+        export LANG=en_US.UTF-8
+        export LC_ALL=en_US.UTF-8
+        ansible-playbook deploy.yml -i inventory
+        '''
+    }
+}
     }
 }
