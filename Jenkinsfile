@@ -47,5 +47,10 @@ stage('Push Docker Image to Docker Hub') {
         '''
     }
 }
+stage('Verify Deployment') {
+    steps {
+        sh 'docker ps'
+    }
+}
     }
 }
