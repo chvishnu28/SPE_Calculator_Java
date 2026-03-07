@@ -35,7 +35,7 @@ pipeline {
                         sh 'docker push vishnuchavala/scientific-calculator:latest'
                     }
                 }
-                sh 'docker tag scientific-calculator vishnuchavala/scientific-calculator'
+sh 'docker tag scientific-calculator vishnuchavala/scientific-calculator'
                 sh 'docker push vishnuchavala/scientific-calculator'
             }
         }
