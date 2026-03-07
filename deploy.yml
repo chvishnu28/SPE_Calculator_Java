@@ -1,28 +1,26 @@
 ---
 - name: Deploy Calculator App with Docker
-  hosts: webserver
-become: true
+  hosts: localhost
+  become: true
+
   tasks:
+
     - name: Install Docker
       apt:
         name: docker.io
         state: present
+        update_cache: yes
 
-    - name: Pull the latest Docker image
-      community.docker.docker_image:
-        name: tushar542001/scientific-calculator:latest
-        source: pull
-
-    - name: Stop and remove existing container (if any)
-      community.docker.docker_container:
-        name: scientific-calculator
-        state: absent
-
-    - name: Run new container
-      community.docker.docker_container:
-        name: scientific-calculator
-        image: tushar542001/scientific-calculator:latest
+    - name: Start Docker service
+      service:
+        name: docker
         state: started
-        restart_policy: always
+        enabled: true
+
+    - name: Run Docker container
+      docker_container:
+        name: scientific-calculator
+        image: vishnuchavala/scientific-calculator:latest
+        state: started
         interactive: true
-        
+        tty: true
