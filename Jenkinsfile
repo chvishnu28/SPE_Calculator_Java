@@ -35,6 +35,8 @@ pipeline {
                         sh 'docker push vishnuchavala/scientific-calculator:latest'
                     }
                 }
+                sh 'docker tag scientific-calculator vishnuchavala/scientific-calculator'
+                sh 'docker push vishnuchavala/scientific-calculator'
             }
         }
 
@@ -51,6 +53,7 @@ pipeline {
         stage('Verify Deployment') {
             steps {
                 sh 'docker ps'
+                sh 'ansible-playbook deploy.yml -i inventory'
             }
         }
     }
