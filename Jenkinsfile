@@ -27,13 +27,17 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image to Docker Hub') {
-            steps {
-                sh 'docker tag scientific-calculator vishnuchavala/scientific-calculator'
-                sh 'docker push vishnuchavala/scientific-calculator'
+        
+stage('Push Docker Image to Docker Hub') {
+    steps {
+        script {
+            docker.withRegistry('', 'dockerhub-cred') {
+                sh 'docker tag scientific-calculator vishnuchavala/scientific-calculator:latest'
+                sh 'docker push vishnuchavala/scientific-calculator:latest'
             }
         }
-
+    }
+}
         stage('Deploy with Ansible') {
             steps {
                 sh 'ansible-playbook deploy.yml -i inventory'
