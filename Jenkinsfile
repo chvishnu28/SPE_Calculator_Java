@@ -99,5 +99,5 @@ stage('Verify Deployment') {
         sh 'docker ps'
     }
 }
-    }
+}
 }
