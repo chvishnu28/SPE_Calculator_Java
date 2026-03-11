@@ -71,7 +71,8 @@ ${env.BUILD_URL}
 
 Calculator CI/CD pipeline executed successfully.
 """,
-                to: "vishnu.chavala@gmail.com",
+                from:"vishnu.chavala@gmail.com",
+                to: "vishnu.chavala@gmail.com , vishnuchavala9@gmail.com",
                 mimeType: 'text/plain',
                 recipientProviders: [[$class: 'DevelopersRecipientProvider']]
             )
@@ -88,8 +89,8 @@ Build Number: ${env.BUILD_NUMBER}
 
 Build URL:
 ${env.BUILD_URL}
-""",
-                to: "vishnu.chavala@gmail.com",
+""",            from:"vishnu.chavala@gmail.com",
+                to: "vishnu.chavala@gmail.com , vishnuchavala9@gmail.com",
                 mimeType: 'text/plain',
                 recipientProviders: [[$class: 'DevelopersRecipientProvider']]
             )
