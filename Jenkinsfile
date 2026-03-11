@@ -59,29 +59,39 @@ pipeline {
 
         success {
             emailext(
-                subject: "Jenkins Build SUCCESS",
+                subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: """
-Calculator pipeline executed successfully.
+Build SUCCESS
 
-Job Name: ${env.JOB_NAME}
+Project: ${env.JOB_NAME}
 Build Number: ${env.BUILD_NUMBER}
-Build URL: ${env.BUILD_URL}
+
+Build URL:
+${env.BUILD_URL}
+
+Calculator CI/CD pipeline executed successfully.
 """,
-                to: "vishnu.chavala@gmail.com"
+                to: "vishnu.chavala@gmail.com",
+                mimeType: 'text/plain',
+                recipientProviders: [[$class: 'DevelopersRecipientProvider']]
             )
         }
 
         failure {
             emailext(
-                subject: "Jenkins Build FAILED",
+                subject: "FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: """
-Calculator pipeline failed.
+Build FAILED
 
-Job Name: ${env.JOB_NAME}
+Project: ${env.JOB_NAME}
 Build Number: ${env.BUILD_NUMBER}
-Build URL: ${env.BUILD_URL}
+
+Build URL:
+${env.BUILD_URL}
 """,
-                to: "vishnu.chavala@gmail.com"
+                to: "vishnu.chavala@gmail.com",
+                mimeType: 'text/plain',
+                recipientProviders: [[$class: 'DevelopersRecipientProvider']]
             )
         }
     }
