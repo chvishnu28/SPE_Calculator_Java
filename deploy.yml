@@ -2,14 +2,8 @@
 - name: Deploy Calculator App with Docker
   hosts: localhost
   become: true
-  hosts: webserver
-become: true
-  tasks:
-
-    - name: Run Calculator Container
 
   tasks:
-
     - name: Run Calculator Container
       docker_container:
         name: scientific-calculator
