@@ -56,44 +56,19 @@ pipeline {
     }
 
     post {
-
-        success {
-            emailext(
-                subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: """
-Build SUCCESS
-
-Project: ${env.JOB_NAME}
-Build Number: ${env.BUILD_NUMBER}
-
-Build URL:
-${env.BUILD_URL}
-
-Calculator CI/CD pipeline executed successfully.
-""",
-                from:"vishnu.chavala@gmail.com",
-                to: "vishnu.chavala@gmail.com , vishnuchavala9@gmail.com",
-                mimeType: 'text/plain',
-                recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-            )
-        }
-
-        failure {
-            emailext(
-                subject: "FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: """
-Build FAILED
-
-Project: ${env.JOB_NAME}
-Build Number: ${env.BUILD_NUMBER}
-
-Build URL:
-${env.BUILD_URL}
-""",            from:"vishnu.chavala@gmail.com",
-                to: "vishnu.chavala@gmail.com , vishnuchavala9@gmail.com",
-                mimeType: 'text/plain',
-                recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-            )
-        }
+    success {
+        mail(
+            to: "vishnu.chavala@gmail.com",
+            subject: "Build Success",
+            body: "Build completed successfully: ${env.BUILD_URL}"
+        )
     }
+    failure {
+        mail(
+            to: "vishnu.chavala@gmail.com",
+            subject: "Build Failed",
+            body: "Build Failure: ${env.BUILD_URL}"
+        )
+    }
+  }
 }
